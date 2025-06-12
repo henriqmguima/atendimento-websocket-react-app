@@ -91,10 +91,7 @@ thead{
   color: white;
   border: none;
 }
-thead tr{
-    border-radius: 10px;
 
-}
 
 input, select, textarea {
   font-family: inherit;
@@ -105,4 +102,15 @@ input, select, textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.5em;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #9ee698; /* Linhas pares */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Linhas ímpares */
+}
+tbody tr{
+  height: 40px;
 }

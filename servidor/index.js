@@ -42,7 +42,6 @@ io.on('connection', (socket) => {
     fila = fila.map(item => item.senha === senha ? { ...item, status: novoStatus } : item);
     io.emit('filaAtualizada', fila);
   });
-
   socket.on('disconnect', () => {
     console.log('Cliente desconectado:', socket.id);
   });

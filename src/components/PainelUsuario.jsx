@@ -55,13 +55,13 @@ const styles = {
     marginBottom: '30px',
   },
   callBox: {
-    backgroundColor: '#E0F2F1',
+    backgroundColor: '#102EE0',
     padding: '20px',
     borderRadius: '12px',
   },
   name: {
     fontSize: '24px',
-    color: '#102EE0',
+    color: '#fff',
     marginBottom: '10px',
   },
   senha: {

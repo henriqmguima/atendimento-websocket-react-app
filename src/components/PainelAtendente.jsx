@@ -15,17 +15,32 @@ function PainelAtendente() {
     };
   }, []);
 
-  const registrarUsuario = () => {
-    if (nome && cpf) {
-      socket.emit('registrarUsuario', { nome, cpf });
-      setNome('');
-      setCpf('');
-    }
+const registrarUsuario = () => {
+  if (!nome || !cpf) {
+    alert('Preencha nome e CPF!');
+    return;
+  }
+
+  const cpfLimpo = cpf.replace(/\D/g, ''); // remove tudo que não é número
+
+  if (cpfLimpo.length !== 11) {
+    alert('CPF deve conter exatamente 11 dígitos!');
+    return;
+  }
+
+  socket.emit('registrarUsuario', { nome, cpf: cpfLimpo });
+    setNome('');
+    setCpf('');
   };
 
   const atualizarStatus = (senha, novoStatus) => {
     socket.emit('atualizarStatus', { senha, novoStatus });
   };
+const removerSenha = (id) => {
+  if (window.confirm('Tem certeza que deseja remover esta senha da fila?')) {
+    socket.emit('removerSenha', id);
+  }
+};
 
   return (
     <div style={styles.container}>
