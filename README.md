@@ -76,3 +76,4 @@ cd atendimento-websocket-react-app/servidor
 ```
 npm run dev
 ```
+5. A aplicação deve ser aberta em duas abas, uma para rodar o painel de atendente, e outra para visualizar o usuário
