@@ -69,6 +69,8 @@ cd atendimento-websocket-react-app/servidor
 ```
 node index.js
 ```
+Servidor será executado em: `http://localhost:3001`
+
 4. No outro terminal, vá até a raiz do projeto e execute a aplicação
 ```
 cd atendimento-websocket-react-app/servidor
@@ -76,4 +78,6 @@ cd atendimento-websocket-react-app/servidor
 ```
 npm run dev
 ```
+Aplicação estará disponível em: `http://localhost:5173`
+
 5. A aplicação deve ser aberta em duas abas, uma para rodar o painel de atendente, e outra para visualizar o usuário
