@@ -73,7 +73,7 @@ Servidor será executado em: `http://localhost:3001`
 
 4. No outro terminal, vá até a raiz do projeto e execute a aplicação
 ```
-cd atendimento-websocket-react-app/servidor
+cd atendimento-websocket-react-app
 ```
 ```
 npm run dev
