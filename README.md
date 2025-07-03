@@ -75,7 +75,7 @@ Aplicação estará disponível em: `http://localhost:5173`
 
 
 
-🧪 4. Testar o sistema
+### 🧪 4. Testar o sistema
 Abra duas abas no navegador:
 
 Uma para o atendente: http://localhost:5173/atendente
