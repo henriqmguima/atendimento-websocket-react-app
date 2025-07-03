@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PainelUsuario from './components/PainelUsuario';
 import PainelAtendente from './components/PainelAtendente';
 import Home from './pages/Home';
-import { conectarSocket } from './services/socket'; // importa a função
+import { conectarSocket } from './services/socket';
 
 function App() {
   useEffect(() => {
-    // inicia a conexão WebSocket ao carregar o app
-    conectarSocket(() => {}); // você pode passar um listener global, se quiser
+    conectarSocket(() => {}); 
   }, []);
 
   return (

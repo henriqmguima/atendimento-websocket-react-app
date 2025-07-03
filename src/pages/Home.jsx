@@ -7,7 +7,7 @@ function Home() {
     <div style={styles.container}>
       <div style={styles.card}>
         <img
-          src="/logo.png" // Substitua pelo caminho correto
+          src="/logo.png" 
           alt="Logo"
           style={styles.logo}
         />
@@ -34,7 +34,7 @@ function Home() {
 
 const styles = {
   container: {
-    height: '100vh', // ocupa toda a tela
+    height: '100vh', 
     width: '100vw',
     display: 'flex',
     justifyContent: 'center',

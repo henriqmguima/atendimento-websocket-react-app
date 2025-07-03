@@ -8,8 +8,8 @@ html, body, #root {
   height: 100%;
   width: 100%;
   background: radial-gradient(circle, 
-              #ffffff 0%,       /* branco no centro */
-              #000000 200%        /* preto nas bordas */
+              #ffffff 0%,      
+              #000000 200%       
             );
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -105,11 +105,11 @@ input, select, textarea {
 }
 
 tbody tr:nth-child(even) {
-  background-color: #9ee698; /* Linhas pares */
+  background-color: #9ee698; 
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #ffffff; /* Linhas ímpares */
+  background-color: #ffffff; 
 }
 tbody tr{
   height: 40px;

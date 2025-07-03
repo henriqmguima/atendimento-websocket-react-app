@@ -7,17 +7,15 @@ function gerarSenha() {
   return 'A' + String(contador++).padStart(3, '0');
 }
 
-// Cria servidor WebSocket
 const server = new WebSocketServer({ port: 8080 });
 
 server.on('connection', (ws) => {
   console.log('Novo cliente conectado');
 
-  // Envia fila atual
   ws.send(JSON.stringify({ tipo: 'filaAtualizada', fila }));
 
   ws.on('message', (data) => {
-    console.log('📩 Mensagem recebida:', data.toString()); // <--- log útil
+    console.log('Mensagem recebida:', data.toString()); 
     try {
       const msg = JSON.parse(data.toString());
 
@@ -49,11 +47,10 @@ server.on('connection', (ws) => {
           broadcast({ tipo: 'filaAtualizada', fila });
         }
       } else {
-          console.warn('⚠️ Tipo de mensagem desconhecido:', msg.tipo);
+          console.warn('Tipo de mensagem desconhecido:', msg.tipo);
       }
     } catch (err) {
-        console.error('❌ Erro ao processar mensagem:', err.message);
-        // Opcionalmente envie um erro de volta ao cliente:
+        console.error('Erro ao processar mensagem:', err.message);
         ws.send(JSON.stringify({ tipo: 'erro', mensagem: 'Mensagem inválida' }));
     }
   });
@@ -67,7 +64,6 @@ server.on('connection', (ws) => {
   });
 });
 
-// Envia mensagem a todos os clientes
 function broadcast(msgObj) {
   const msg = JSON.stringify(msgObj);
   server.clients.forEach(client => {
