@@ -48,7 +48,6 @@ cd servidor
 ```
 npm install ws
 ```
-```
 
 ### 3. Execute o servidor e o cliente
 
@@ -73,3 +72,16 @@ npm run dev
 Aplicação estará disponível em: `http://localhost:5173`
 
 5. A aplicação deve ser aberta em duas abas, uma para rodar o painel de atendente, e outra para visualizar o usuário
+
+
+
+🧪 4. Testar o sistema
+Abra duas abas no navegador:
+
+Uma para o atendente: http://localhost:5173/atendente
+
+Outra para o usuário: http://localhost:5173/usuario
+
+### 🤝 Autor
+Henrique Machado Guimarães e Eduardo dos Santos Botelho (@eduardobotelho28)
+Projeto desenvolvido para disciplina de Frameworks de Front-end.
