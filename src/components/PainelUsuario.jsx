@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-import socket from '../services/socket';
+import { conectarSocket } from '../services/socket';
 
 function PainelUsuario() {
   const [chamando, setChamando] = useState(null);
 
   useEffect(() => {
-    socket.on('filaAtualizada', (fila) => {
-      const emChamada = fila.find(item => item.status === 'Chamando');
-      setChamando(emChamada || null);
+    conectarSocket((msg) => {
+      if (msg.tipo === 'filaAtualizada') {
+        const emChamada = msg.fila.find(item => item.status === 'Chamando');
+        setChamando(emChamada || null);
+      }
     });
-
-    return () => {
-      socket.off('filaAtualizada');
-    };
   }, []);
 
   return (
@@ -67,6 +65,7 @@ const styles = {
   senha: {
     fontSize: '18px',
     fontWeight: 'bold',
+    color: '#fff',
   },
   noCall: {
     fontSize: '16px',

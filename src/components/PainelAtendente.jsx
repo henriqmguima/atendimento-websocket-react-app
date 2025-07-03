@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import socket from '../services/socket';
+import { conectarSocket, enviar } from '../services/socket';
 
 function PainelAtendente() {
   const [nome, setNome] = useState('');
@@ -7,40 +7,51 @@ function PainelAtendente() {
   const [fila, setFila] = useState([]);
 
   useEffect(() => {
-    socket.on('filaAtualizada', (novaFila) => {
-      setFila(novaFila);
+    conectarSocket((msg) => {
+      if (msg.tipo === 'filaAtualizada') {
+        setFila(msg.fila);
+      }
     });
-    return () => {
-      socket.off('filaAtualizada');
-    };
   }, []);
 
-const registrarUsuario = () => {
-  if (!nome || !cpf) {
-    alert('Preencha nome e CPF!');
-    return;
-  }
+  const registrarUsuario = () => {
+    if (!nome || !cpf) {
+      alert('Preencha nome e CPF!');
+      return;
+    }
 
-  const cpfLimpo = cpf.replace(/\D/g, ''); // remove tudo que não é número
+    const cpfLimpo = cpf.replace(/\D/g, '');
+    if (cpfLimpo.length !== 11) {
+      alert('CPF deve conter exatamente 11 dígitos!');
+      return;
+    }
 
-  if (cpfLimpo.length !== 11) {
-    alert('CPF deve conter exatamente 11 dígitos!');
-    return;
-  }
+    enviar({
+      tipo: 'registrarUsuario',
+      nome,
+      cpf: cpfLimpo,
+    });
 
-  socket.emit('registrarUsuario', { nome, cpf: cpfLimpo });
     setNome('');
     setCpf('');
   };
 
   const atualizarStatus = (senha, novoStatus) => {
-    socket.emit('atualizarStatus', { senha, novoStatus });
+    enviar({
+      tipo: 'atualizarStatus',
+      senha,
+      novoStatus,
+    });
   };
-const removerSenha = (id) => {
-  if (window.confirm('Tem certeza que deseja remover esta senha da fila?')) {
-    socket.emit('removerSenha', id);
-  }
-};
+
+  const removerSenha = (senha) => {
+    if (window.confirm('Deseja remover esta senha da fila?')) {
+      enviar({
+        tipo: 'removerSenha',
+        senha,
+      });
+    }
+  };
 
   return (
     <div style={styles.container}>
@@ -77,13 +88,16 @@ const removerSenha = (id) => {
           </thead>
           <tbody>
             {fila.map((item, index) => (
-              <tr key={index}>
+              <tr
+                key={index}
+                style={{ backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#ffffff' }}
+              >
                 <td>{item.senha}</td>
                 <td>{item.nome}</td>
                 <td>{item.cpf}</td>
                 <td>{item.status}</td>
                 <td>
-                  {item.status === 'Aguardando' && (
+                  {item.status === 'Aguardando' && !fila.some(s => s.status === 'Chamando') && (
                     <button
                       style={styles.callButton}
                       onClick={() => atualizarStatus(item.senha, 'Chamando')}
@@ -91,6 +105,7 @@ const removerSenha = (id) => {
                       Chamar
                     </button>
                   )}
+
                   {item.status === 'Chamando' && (
                     <>
                       <button
@@ -107,6 +122,12 @@ const removerSenha = (id) => {
                       </button>
                     </>
                   )}
+                  <button
+                    style={styles.removeButton}
+                    onClick={() => removerSenha(item.senha)}
+                  >
+                    Remover
+                  </button>
                 </td>
               </tr>
             ))}
@@ -171,6 +192,7 @@ const styles = {
     border: 'none',
     borderRadius: '6px',
     cursor: 'pointer',
+    marginRight: '5px',
   },
   attendedButton: {
     backgroundColor: '#0EAA00',
@@ -187,6 +209,15 @@ const styles = {
     padding: '5px 10px',
     border: 'none',
     borderRadius: '6px',
+    cursor: 'pointer',
+  },
+  removeButton: {
+    backgroundColor: '#777',
+    color: '#fff',
+    padding: '5px 10px',
+    border: 'none',
+    borderRadius: '6px',
+    marginLeft: '5px',
     cursor: 'pointer',
   },
 };
