@@ -7,9 +7,8 @@ A aplicação permite que atendentes cadastrem usuários com nome e CPF, e os or
 ## 🚀 Tecnologias Utilizadas
 
 - ⚛️ React (Vite)
-- 📦 Socket.IO (WebSocket)
-- 🔙 Node.js + Express
-- 🔐 UUID (geração de senhas únicas)
+- 📦 WebSocket
+- 🔙 Node.js
 
 ---
 
@@ -44,20 +43,13 @@ cd atendimento-websocket-react-app
 npm install
 ```
 ```
-npm install socket.io-client
-```
-```
 cd servidor
 ```
 ```
-npm install
+npm install ws
 ```
 ```
-node index.js
-```
-```
-npm install express socket.io cors
-```
+
 ### 3. Execute o servidor e o cliente
 
 1. Abra dois terminais
@@ -67,13 +59,13 @@ cd atendimento-websocket-react-app/servidor
 ```
 3. Execute o servidor
 ```
-node index.js
+npm run dev
 ```
-Servidor será executado em: `http://localhost:3001`
+Servidor será executado em: `http://localhost:8080`
 
 4. No outro terminal, vá até a raiz do projeto e execute a aplicação
 ```
-cd atendimento-websocket-react-app/servidor
+cd atendimento-websocket-react-app
 ```
 ```
 npm run dev
